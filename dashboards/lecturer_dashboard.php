@@ -1,15 +1,17 @@
 <?php
-declare(strict_types=1);
 session_start();
 
-if(($_SESSION["role"] ?? "") !== "Lecturer") {
-    header("Location: ../public/login.php?err=Unauthorized access. Please login as a lecturer.");
+/* Check if user logged in as a lecturer */
+if(!isset($_SESSION["role"]) || $_SESSION["role"] != "lecturer") {
+    header("Location: ../public/login.php");
     exit;
 }
 
-$lecturer_id = $_SESSION["uid" ?? ""];
-
+/* Get Session data */
+$lecturer_id = $_SESSION["user_id"] ?? "";
+$lecturer_name = $_SESSION["name"] ?? "";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,24 +20,31 @@ $lecturer_id = $_SESSION["uid" ?? ""];
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <h1>Visiting Lecturer Dashboard</h1>
 
-    <h1>Visiting Lecturer Dashboard</h1>
-    <p>Welcome, <b><?=  htmlspecialchars($lecturer_id) ?></b></p>
+        <p>Welcome, <b><?php echo $lecturer_name; ?></b></p>
+        <p>ID: <b><?php echo $lecturer_id; ?></b></p>
 
-    <hr>
+        <hr>
 
-    <h3>Menu</h3>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Announcements</a></li>
-        <li><a href="#">Resources</a></li>
-        <li><a href="#">My Students</a></li>
-        <li><a href="#">Presentation</a></li>
-        <li><a href="#">Grading</a></li>
-    </ul>
+        <h3>Menu</h3>
 
-    <hr>
+<ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Announcements</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">My Students</a></li>
+    <li><a href="#">Presentation</a></li>
+    <li><a href="#">Grading</a></li>
+</ul>
 
-    <a href="../public/logout.php">Logout</a>
-    </body>
+<hr>
+
+<a href="../public/logout.php">
+    <button style="padding:8px 15px; font-size:14px; color:red;">
+        Logout
+    </button>
+</a>
+
+</body>
 </html>

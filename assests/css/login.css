@@ -1,0 +1,221 @@
+/* LOGIN PAGE */
+.login-page-container {
+    width: 100%;
+    max-width: 1120px;
+    min-height: 560px;
+    margin: 0 auto;
+    display: flex;
+    background-color: #efefef;
+}
+
+.login-left-panel {
+    width: 360px;
+    background-color: #d9d9d9;
+    padding: 16px 14px 20px 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-left-panel h1 {
+    font-size: 21px;
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+
+.login-left-panel h3 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.login-left-panel p {
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.login-left-panel form label {
+    display: block;
+    font-size: 14px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
+
+.login-left-panel form input {
+    width: 100%;
+    height: 32px;
+    border: none;
+    background-color: #ffffff;
+    padding: 6px 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.forgot-password-link {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 70px;
+}
+
+.forgot-password-link a {
+    color: red;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-buttons button,
+.back-btn {
+    width: 132px;
+    height: 28px;
+    border: none;
+    background-color: #f4f4f4;
+    color: #111;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.login-right-panel {
+    flex: 1;
+    background-color: #f3f3f3;
+}
+
+@media (max-width: 768px) {
+    .login-page-container {
+        flex-direction: column;
+    }
+
+    .login-left-panel {
+        width: 100%;
+    }
+
+    .login-right-panel {
+        min-height: 200px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #111;
+    padding: 24px;
+}
+
+.login-page-container {
+    width: 100%;
+    max-width: 1120px;
+    min-height: 560px;
+    margin: 0 auto;
+    display: flex;
+    background-color: #efefef;
+}
+
+.login-left-panel {
+    width: 360px;
+    background-color: #d9d9d9;
+    padding: 16px 14px 20px 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-left-panel h1 {
+    font-size: 21px;
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+
+.login-left-panel h3 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.login-left-panel p {
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.login-left-panel form label {
+    display: block;
+    font-size: 14px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
+
+.login-left-panel form input,
+.login-left-panel form select {
+    width: 100%;
+    height: 32px;
+    border: none;
+    background-color: #ffffff;
+    padding: 6px 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.forgot-password-link {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 70px;
+}
+
+.forgot-password-link a {
+    color: red;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-buttons button,
+.back-btn {
+    width: 132px;
+    height: 28px;
+    border: none;
+    background-color: #f4f4f4;
+    color: #111;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.login-right-panel {
+    flex: 1;
+    background-color: #f3f3f3;
+}
+
+@media (max-width: 768px) {
+    .login-page-container {
+        flex-direction: column;
+    }
+
+    .login-left-panel {
+        width: 100%;
+    }
+
+    .login-right-panel {
+        min-height: 200px;
+    }
+}

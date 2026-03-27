@@ -26,21 +26,46 @@ if (isset($_SESSION['role'])) {
     <meta charset="UTF-8">
     <title>CCI Internship Management System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assests/css/style.css">
 </head>
 <body>
-    <h1>CCI Internship Management System</h1>
-    <p>Welcome to the CCI Internship Management System!</p>
 
-    <hr>
+    <div class="main-container">
+        <header class="topbar">
+            <div class="brand">CCI IMS</div>
 
-    <div>
-        <a href="login.php">
-            <button type="button">Login</button>
-        </a>
+            <div class="nav-actions">
+                <a href="login.php" class="login-btn">
+                    <span>LOGIN</span>
+                </a>
 
-        <a href="register.php">
-            <button type="button">Register</button>
-        </a>
+                <a href="register.php" class="register-btn">REGISTER</a>
+            </div>
+        </header>
+        
+        <section class="content-section">
+            <div class="left-panel">
+                <h1>
+                    CCI<br>
+                    INTERNSHIP<br>
+                    MANAGEMENT<br>
+                    SYSTEM
+                </h1>
+            </div>
+
+            <div class="right-panel">
+                <p>
+                    WELCOME<br>
+                    TO<br>
+                    NEW<br>
+                    CCI<br>
+                    INTERNSHIP<br>
+                    MANAGEMENT<br>
+                    SYSTEM!
+                </p>
+            </div>
+        </section>
     </div>
+    
 </body>
 </html>

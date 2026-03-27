@@ -1,69 +1,70 @@
-<?php 
-declare(strict_types=1);
-
+<?php
 session_start();
-require_once __DIR__ . "/../config/db.php";
+require_once '../config/db.php';
 
-if($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: ../public/login.php?err=Invalid request");
+/* Check for the form submitted */
+
+if($_SERVER["REQUEST_METHOD"] != "POST") {
+    echo "<p style='color:red;'> Invalid reuest </p>";
+    echo "<a href='../public/login.php'>Back to Login Page</a>";
     exit;
 }
 
-$role  = $_POST["role"] ?? "";
-$id    = trim($_POST["id"] ?? "");
-$pw    = $_POST["password"] ?? "";
+/* Get the Form Data */
 
-if(!in_array($role, ["student", "lecturer", "admin"], true)) {
-    header("Location: ../public/login.php?err= Invalid role selected");
+$role = $_POST["role"];
+$user_id = $_POST["user_id"];
+$password = $_POST["password"];
+
+/* Check for empty fields */
+
+if($role == "" || $user_id == "" || $password == "") {
+    echo "<p style='color:red'> Please fill all of the fields first!!</p>";
+    echo "<a href='../public/login.php'>Back to Login Again</a>";
     exit;
 }
 
-if($id === "" || $pw === "") {
-    header("Location: ../public/login.php?err= Please fill in all fields");
+/* Check user existence in the database */
+
+$sql = "SELECT * FROM users WHERE user_id ='$user_id' AND role='$role'";
+$result = mysqli_query($conn, $sql);
+
+/* error for no users found */
+if(mysqli_num_rows($result) == 0) {
+    echo "<p style='color:red;'> User does not exist! Please register if you haven't registered yet!</p>";
+    echo "<a href='../public/login.php'>Login Again</a>";
     exit;
 }
 
-$table = "";
-$idColumn = "";
+/* fetch user data */
 
-if ($role === "student") {
-    $table = "students";
-    $idColumn = "student_id";
-} elseif ($role === "lecturer") {
-    $table = "lecturers";
-    $idColumn = "lecturer_id";
-} else {
-    $table = "admin";
-    $idColumn = "admin_id";
-}
+$user = mysqli_fetch_assoc($result);
 
-try {
-    $stmt = $pdo->prepare("SELECT $idColumn AS uid, password FROM $table WHERE $idColumn = ?");
-    $stmt->execute([$id]);
-    $user = $stmt->fetch();
+/* check password for the users */
 
-    if (!$user || !password_verify($pw, $user["password"])) {
-        header("Location: ../public/login.php?err=Invalid ID or Password");
-        exit;
-    }
-
-    $_SESSION["role"] = $role;
-    $_SESSION["uid"]  = $user["uid"];
-
-    // Redirect based on role
-    if ($role === "student") {
-        header("Location: ../dashboards/student_dashboard.php");
-        exit;
-    } elseif ($role === "lecturer") {
-        header("Location: ../dashboards/lecturer_dashboard.php");
-        exit;
-    } else {
-        header("Location: ../dashboards/admin_dashboard.php");
-        exit;
-    }
-
-} catch (PDOException $e) {
-    // Hide DB error for security
-    header("Location: ../public/login.php?err=Login failed. Please try again.");
+if($password != $user["password"]) {
+    echo "<p style='color:red;'> Incorrect Password! Please try again.</p>";
+    echo "<a href='../public/login.php'>Login Again</a>";
     exit;
 }
+
+/* Successful login */
+
+$_SESSION["user_id"] = $user["user_id"];
+$_SESSION["role"] = $user["role"];
+$_SESSION["name"] = $user["name"];
+
+/* Page redirection based on the user role */
+if($role == "student") {
+    header("Location: ../dashboards/student_dashboard.php");
+}
+else if($role == "lecturer") {
+    header("Location: ../dashboards/lecturer_dashboard.php");
+} 
+else {
+    header("Location: ../dashboards/admin_dashboard.php");
+}
+
+exit;
+
+?>

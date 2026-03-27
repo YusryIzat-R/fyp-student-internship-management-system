@@ -1,121 +1,83 @@
 <?php
-
 session_start();
 
-if (isset($_SESSION['role'])) {
-    switch ($_SESSION['role']) {
-                case 'student':
-            header("Location: ../dashboards/student_dashboard.php");
-            exit;
-        
-        case 'lecturer':
-            header("Location: ../dashboards/lecturer_dashboard.php");
-            exit;
-        
-        case 'admin':
-            header("Location: ../dashboards/admin_dashboard.php");
-            exit;
+if(isset($_SESSION['role'])) {
+
+    if($_SESSION['role'] == "student") {
+        header("Location: ../dashboards/student_dashboard.php");
+        exit;
+    }
+    if($_SESSION['role'] == "lecturer") {
+        header("Location: ../dashboards/lecturer_dashboard.php");
+        exit;
+    }
+    if($_SESSION['role'] == "admin") {
+        header("Location: ../dashboards/admin_dashboard.php");
+        exit;
     }
 }
-
-$err = $_GET['err'] ?? '';
-$ok = $_GET['ok'] ?? '';
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Register - CCI IMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assests/css/register.css">
 </head>
-
 <body>
-    <h2>Register</h2>
-    <p>Please select your role and fill in the registration details</p>
 
-    <?php if ($err !== ''): ?>
-        <p style="color: red;"><b><?=  htmlspecialchars($err) ?></b></p>
-    <?php endif; ?>
+    <div class="register-page-container">
 
-    <form method="POST" action="../verify/register.php">
-        <!-- Role Selection -->
-        <label for="role">Register as:</label><br>
-        <select name="role" id="role" required>
-            <option value="student">Student</option>
-            <option value="lecturer">Visiting Lecturer</option>
-        </select>
-        <br><br>
-    
-            <!-- ID Field -->
-        <label for="user_id">ID:</label><br>
-        <input
-            type="text"
-            id="user_id"
-            name="id"
-            required
-            placeholder="Student ID / Lecturer ID"
-        >
-        <br><br>
+        <div class="register-left-panel">
+            <form method="POST" action="../verify/register.php">
+                <label for="name">Enter Username:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name">
 
-        <!-- Name Field -->
-        <label for="name">Full Name:</label><br>
-        <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            placeholder="Enter your full name"
-        >
-        <br><br>
+                <label for="user_id">Enter ID:</label>
+                <input type="text" id="user_id" name="user_id" placeholder="Enter your ID">
 
-        <!-- Email Field -->
-        <label for="email">Email:</label><br>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            placeholder="example@uniten.edu.my"
-        >
-        <br><br>
+                <label for="email">Enter Email:</label>
+                <input type="email" id="email" name="email" placeholder="example@uniten.edu.my">
 
-        <!-- Password -->
-        <label for="password">Password:</label><br>
-        <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            minlength="6"
-            placeholder="Minimum 6 characters"
-        >
-        <br><br>
+                <label for="password">Enter Password:</label>
+                <input type="password" id="password" name="password" placeholder="Create a password">
 
-        <!-- Confirm Password -->
-        <label for="confirm_password">Confirm Password:</label><br>
-        <input
-            type="password"
-            id="confirm_password"
-            name="confirm_password"
-            required
-            minlength="6"
-            placeholder="Re-enter password"
-        >
-        <br><br>
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password">
 
-        <!-- Buttons -->
-        <button type="submit">Register</button>
-        <a href="login.php"><button type="button">Back to Login</button></a>
-        <a href="index.php"><button type="button">Back to Home</button></a>
-    </form>
+                <label for="role">Select Role:</label>
+                <select name="role" id="role">
+                    <option value="student">Student</option>
+                    <option value="lecturer">Visiting Lecturer</option>
+                </select>
 
-    <hr>
+                <div class="register-buttons">
+                    <a href="login.php" class="back-login-btn">BACK TO LOGIN</a>
+                    <button type="submit">REGISTER</button>
+                </div>
+            </form>
+        </div>
 
-    
+        <div class="register-right-section">
+            <div class="register-info-box">
+                <h2>
+                    CCIIMS<br>
+                    CCI<br>
+                    INTERNSHIP<br>
+                    MANAGEMENT<br>
+                    SYSTEM
+                </h2>
 
-</body>
-</html>
+                <p>
+                    PLEASE ENTER YOUR DETAILS<br>
+                    TO REGISTER
+                </p>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 </html>

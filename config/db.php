@@ -1,22 +1,10 @@
 <?php
-declare(strict_types=1);
-
 $host = "localhost";
-$dbname = "cci_ims";
-$username = "root";
-$password = "";
-$charset = "utf8mb4";
+$user = "root";
+$pass = "";
+$db   = "cci_ims";
 
-$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
-
-$options = [
-    PDO::ATTR_ERRMODE               =>PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE    =>PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES      => false,
-];
-
-try {
-    $pdo = new PDO($dsn, $username, $password, $options);
-} catch (PDOException $e) {
-    die("DB connection failed." . $e->getMessage());
+$conn = mysqli_connect($host, $user, $pass, $db);
+if(!$conn) {
+    die("Db connection failed: " . mysqli_connect_error());
 }
