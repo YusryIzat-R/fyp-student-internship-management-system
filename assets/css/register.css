@@ -75,8 +75,9 @@ body {
 .register-right-section {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    padding-right: 20px;
 }
 
 .register-info-box {
@@ -87,6 +88,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    text-align: right;
 }
 
 .register-info-box h2 {

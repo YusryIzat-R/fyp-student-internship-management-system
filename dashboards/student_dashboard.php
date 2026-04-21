@@ -1,47 +1,51 @@
 <?php
 session_start();
 
-/* Check if user logged in as a student */
-
-if(!isset($_SESSION['role']) || $_SESSION['role'] != 'student') {
+if(!isset($_SESSION['role']) || $_SESSION['role'] != "student") {
     header("Location: ../public/login.php");
     exit;
 }
 
-/* Get Session data */
-$student_id = $_SESSION['user_id'];
-$student_name = $_SESSION['name'];
+$full_name = "";
+if(isset($_SESSION['full_name'])) {
+    $full_name = $_SESSION['full_name'];
+} else {
+    $full_name = $_SESSION['login_id'];
+}
 ?>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Student Dashboard - CCI IMS</title>
-</head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Dashboard - CCI IMS</title>
+        <link rel="stylesheet" href="../assets/css/dashboards.css">
+    </head>
 
-<body>
-    <p>Welcome,<b><?php echo $student_name; ?></b></p>
-    <p>ID: <b><?php echo $student_id; ?></b></p>
+    <body>
+        <div class="wrapper">
+            <aside class="sidebar">
+                <h3>Student Menu</h3>
 
-    <hr>
+                <nav class="menu">
+                    <a href="../dashboards/student_dashboard.php" class="menu-item is-active">Dashboard</a>
+                    <a href="../dashboards/student_announcement.php" class="menu-item">Announcements</a>
+                    <a href="#" class="menu-item">Resources</a>
+                    <a href="#" class="menu-item">My Lecturer</a>
+                    <a href="#" class="menu-item">Presentation</a>
+                    <a href="#" class="menu-item">My Result</a>
+                    <a href="#" class="menu-item">Get Help</a>
+                    <a href="../public/logout.php" class="menu-item">Logout</a>
+                </nav>
+            </aside>
 
-    <h3>Menu</h3>
-
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Announcements</a></li>
-        <li><a href="#">Resources</a></li>
-        <li><a href="#">My Lecturer</a></li>
-        <li><a href="#">Presentation</a></li>
-        <li><a href="#">My Result</a></li>
-        <li><a href="#">Get Help</a></li>
-    </ul>
-
-    <hr>
-        <a href="../public/logout.php">
-            <button style="padding:7px 12px; font-size:14px; color:red;">
-                Logout
-            </button>
-        </a>
-</body>
+            <main class="content">
+                <h1>Welcome, <?php echo $full_name;?></h1>
+                <p>You are logged in as <b><?php echo $_SESSION['role']; ?></b>.</p>
+                <p>Login ID: <?php echo $_SESSION['login_id']; ?></p>
+                <p>This is the Student Dashboard for the CCI IMS</p>
+            </main>
+        </div>
+    </body>
 </html>

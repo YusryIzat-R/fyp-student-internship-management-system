@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    padding: 2rem 1rem;
+    background-color: darkslategray;
+}
+
+.sidebar h3 {
+    color: white;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.menu {
+    margin: 0 -1rem;
+}
+
+.sidebar .menu .menu-item {
+    display: block;
+    padding: 1em;
+    color: white;
+    text-decoration: none;
+    transition: 0.2s linear;
+}
+
+.sidebar .menu .menu-item:hover,
+.sidebar .menu .menu-item.is-active {
+    color: #3bba9c;
+    border-right: 5px solid #3bba9c;
+}
+
+/* Logout button at bottom */
+.sidebar .menu .logout-btn {
+    margin-top: auto;
+    color: #ff6b6b;
+}
+
+.sidebar .menu .logout-btn:hover {
+    color: #ff4d4d;
+    border-right: 5px solid #ff4d4d;
+}
+
+
+.content {
+    flex: 1;
+    padding: 2rem;
+    background-color: #f4f4f4;
+}
+
+.content h1 {
+    color: #3c3f58;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.content p {
+    color: #707793;
+    margin-bottom: 10px;
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.edit-btn {
+    background-color: #3bba9c;
+}
+
+.delete-btn {
+    background-color: #dc3535;
+}
+
