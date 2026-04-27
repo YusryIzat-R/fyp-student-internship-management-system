@@ -56,7 +56,7 @@ if(isset($_SESSION['full_name'])) {
                     <a href="admin_dashboard.php" class="menu-item">Dashboard</a>
                     <a href="admin_announcement.php" class="menu-item">Announcements</a>
                     <a href="manage_student_assignments.php" class="menu-item is-active">Lecturer Assignments</a>
-                    <a href="#" class="menu-item">Manage Lecturers</a>
+                    <a href="manage_lecturers.php" class="menu-item">Manage Lecturers</a>
                     <a href="#" class="menu-item">Results</a>
                     <a href="#" class="menu-item">Get help</a>
                     <a href="../verify/logout.php" class="menu-item">Logout</a>
