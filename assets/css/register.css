@@ -6,124 +6,162 @@
 
 body {
     font-family: Arial, sans-serif;
-    color: #111;
-    padding: 12px;
+    background-color: #f4f6f8;
+    color: #1f2937;
+    min-height: 100vh;
 }
 
+/* REGISTER PAGE */
 .register-page-container {
     width: 100%;
-    max-width: 1120px;
-    min-height: 560px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #efefef;
-    padding: 18px 14px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    background-color: #ffffff;
 }
 
-/* Left panel */
+/* LEFT FORM PANEL */
 .register-left-panel {
-    width: 340px;
-    background-color: #d9d9d9;
-    padding: 14px 12px 18px 12px;
+    background-color: #ffffff;
+    padding: 44px 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid #e5e7eb;
 }
 
 .register-left-panel form label {
     display: block;
-    font-size: 12px;
-    margin-top: 10px;
-    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
 }
 
 .register-left-panel form input,
 .register-left-panel form select {
     width: 100%;
-    height: 32px;
-    border: none;
-    background-color: #f5f5f5;
-    padding: 6px 10px;
+    height: 44px;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    padding: 10px 12px;
     font-size: 14px;
     outline: none;
+    border-radius: 8px;
+    color: #111827;
+    margin-bottom: 16px;
 }
 
-/* Buttons */
+.register-left-panel form input:focus,
+.register-left-panel form select:focus {
+    border-color: #1e3a8a;
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+}
+
+.register-left-panel form input::placeholder {
+    color: #9ca3af;
+}
+
+/* ALERT TEXT */
+.alert {
+    margin-bottom: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.alert.error {
+    color: #b00020;
+}
+
+.alert.success {
+    color: #006b2e;
+}
+
+/* BUTTONS */
 .register-buttons {
-    margin-top: 18px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     gap: 12px;
+    margin-top: 6px;
 }
 
 .register-buttons button,
 .back-login-btn {
-    width: 120px;
-    height: 30px;
-    border: none;
-    background-color: #f5f5f5;
-    color: #111;
-    font-size: 12px;
+    width: 100%;
+    height: 44px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: 0.2s ease;
 }
 
-/* Right section */
+.register-buttons button {
+    border: 1px solid #1e3a8a;
+    background-color: #1e3a8a;
+    color: #ffffff;
+}
+
+.register-buttons button:hover {
+    background-color: #172554;
+}
+
+.back-login-btn {
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    color: #1f2937;
+}
+
+.back-login-btn:hover {
+    background-color: #f3f4f6;
+}
+
+/* RIGHT SECTION */
 .register-right-section {
-    flex: 1;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    padding-right: 20px;
+    justify-content: center;
+    padding: 50px;
 }
 
 .register-info-box {
-    width: 280px;
-    min-height: 380px;
-    background-color: #d9d9d9;
-    padding: 18px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: right;
+    width: 100%;
+    max-width: 560px;
+    color: #ffffff;
 }
 
 .register-info-box h2 {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.25;
-    margin-bottom: 18px;
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 24px;
 }
 
 .register-info-box p {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.35;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #dbeafe;
 }
 
-/* Responsive */
+/* RESPONSIVE */
 @media (max-width: 900px) {
     .register-page-container {
-        flex-direction: column;
-        gap: 24px;
+        grid-template-columns: 1fr;
     }
 
     .register-left-panel {
-        width: 100%;
-        max-width: 420px;
+        min-height: 100vh;
+        border-right: none;
+        padding: 36px 28px;
     }
 
     .register-right-section {
-        width: 100%;
-    }
-
-    .register-info-box {
-        width: 100%;
-        max-width: 420px;
-        min-height: auto;
+        display: none;
     }
 }
 
@@ -131,9 +169,26 @@ body {
     .register-buttons {
         flex-direction: column;
     }
+}
 
-    .register-buttons button,
-    .back-login-btn {
-        width: 100%;
-    }
+.back-home-btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    height: 44px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    color: #374151;
+    transition: 0.2s ease;
+}
+
+.back-home-btn:hover {
+    background-color: #f3f4f6;
 }

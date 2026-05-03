@@ -34,8 +34,28 @@ if(isset($_SESSION['role'])) {
 
 
                 <form method="POST" action="../verify/login.php">
+
+                    <?php if(isset($_SESSION['error'])) { ?>
+                        <div class="alert error">
+                            <?php 
+                                echo $_SESSION['error']; 
+                                unset($_SESSION['error']);
+                            ?>
+                        </div>
+                    <?php } ?>
+
+                    <?php if(isset($_SESSION['success'])) { ?>
+                        <div class="alert success">
+                            <?php 
+                                echo $_SESSION['success']; 
+                                unset($_SESSION['success']);
+                            ?>
+                        </div>
+                    <?php } ?>
+
                     <label for="role">Login as:</label>
                     <select name="role" id="role" required>
+                        <option>-- Select a role --</option>
                         <option value="student">Student</option>
                         <option value="lecturer">Visiting Lecturer</option>
                         <option value="admin">Admin</option>
@@ -58,6 +78,7 @@ if(isset($_SESSION['role'])) {
                 </form>
             </div>
             <div class="login-right-panel">
+            </div>
         </div>
     </body>
 </html>

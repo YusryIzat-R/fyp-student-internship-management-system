@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../config/db.php';
+/** @var mysqli $conn */
 
 if(!isset($_SESSION['role']) || $_SESSION['role'] != "lecturer") {
     header("Location: ../public/login.php");

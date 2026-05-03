@@ -26,46 +26,39 @@ if (isset($_SESSION['role'])) {
     <meta charset="UTF-8">
     <title>CCI Internship Management System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assests/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
     <div class="main-container">
         <header class="topbar">
-            <div class="brand">CCI IMS</div>
-
-            <div class="nav-actions">
-                <a href="login.php" class="login-btn">
-                    <span>LOGIN</span>
-                </a>
-
-                <a href="register.php" class="register-btn">REGISTER</a>
+            <div class="brand">
+                CCI IMS
+                <span class="brand-sub">Internship System</span>
             </div>
         </header>
         
         <section class="content-section">
             <div class="left-panel">
-                <h1>
-                    CCI<br>
-                    INTERNSHIP<br>
-                    MANAGEMENT<br>
-                    SYSTEM
-                </h1>
+                <p class="eyebrow">College of Computing and Informatics</p>
+                <h1>Internship Management System</h1>
+                <p class="hero-text">
+                    Manage student internship registration, lecturer supervision, and admin monitoring in one simple system.
+                </p>
+
+                <div class="hero-actions">
+                <a href="login.php" class="primary-btn">Login</a>
+                <a href="register.php" class="secondary-btn">Create Account</a>
+                </div>
             </div>
 
             <div class="right-panel">
+                <h2>Welcome to CCI IMS</h2>
                 <p>
-                    WELCOME<br>
-                    TO<br>
-                    NEW<br>
-                    CCI<br>
-                    INTERNSHIP<br>
-                    MANAGEMENT<br>
-                    SYSTEM!
+                    A simple platform designed to support internship management for students, lecturers, and administrators.
                 </p>
             </div>
         </section>
     </div>
-    
 </body>
 </html>
