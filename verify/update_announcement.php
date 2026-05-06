@@ -13,16 +13,15 @@ if($_SESSION['role'] == "admin") {
     $back_page = "../dashboards/admin_announcement.php";
 }
 
-
 if($_SERVER['REQUEST_METHOD'] != "POST") {
-    echo "<p style='color:red;'>Invalid request method.</p>";
-    echo "<a href='$back_page'>Back to Announcements</a>";
+    $_SESSION['error'] = "Invalid request method.";
+    header("Location: $back_page");
     exit;
 }
 
 if(!isset($_POST["update_announcement"])) {
-    echo "<p style='color:red;'>Form was not submitted properly!</p>";
-    echo "<a href='$back_page'>Back to Announcements</a>";
+    $_SESSION['error'] = "Form was not submitted properly.";
+    header("Location: $back_page");
     exit;
 }
 
@@ -33,25 +32,32 @@ $login_id = $_SESSION["login_id"];
 $role = $_SESSION["role"];
 
 if($announcement_id == "" || $title == "" || $content == "") {
-    echo "<p style='color:red;'>Please fill in all fields!</p>";
-    echo "<a href='$back_page'>Back to Announcements</a>";
+    $_SESSION['error'] = "Please fill in all fields.";
+    header("Location: $back_page");
     exit;
 }
 
 if($role == "admin") {
-    $sql = "UPDATE announcements SET title='$title', content='$content' WHERE announcement_id='$announcement_id'";
+    $sql = "UPDATE announcements 
+            SET title='$title', content='$content' 
+            WHERE announcement_id='$announcement_id'";
 } else {
-    $sql = "UPDATE announcements SET title='$title', content='$content' WHERE announcement_id='$announcement_id' AND posted_by='$login_id'";
+    $sql = "UPDATE announcements 
+            SET title='$title', content='$content' 
+            WHERE announcement_id='$announcement_id' 
+            AND posted_by='$login_id' 
+            AND role='lecturer'";
 }
 
 $result = mysqli_query($conn, $sql);
 
 if($result && mysqli_affected_rows($conn) > 0) {
+    $_SESSION['success'] = "Announcement updated successfully.";
     header("Location: $back_page");
     exit;
 } else {
-    echo "<p style='color:red;'>Failed to update announcement / you are not the owner of this announcement.</p>";
-    echo "<a href='$back_page'>Back to Announcements</a>";
+    $_SESSION['error'] = "Failed to update announcement or no changes were made.";
+    header("Location: $back_page");
     exit;
 }
 ?>

@@ -9,8 +9,8 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != "admin") {
 }
 
 if(!isset($_GET['id'])) {
-    echo "<p style='color:red;'>Announcement ID not found.</p>";
-    echo "<a href='admin_announcement.php'>Back to Announcements</a>";
+    $_SESSION['error'] = "Announcement ID not found.";
+    header("Location: admin_announcement.php");
     exit;
 }
 
@@ -20,8 +20,8 @@ $sql = "SELECT * FROM announcements WHERE announcement_id = '$id'";
 $result = mysqli_query($conn, $sql);
 
 if(!$result || mysqli_num_rows($result) == 0) {
-    echo "<p style='color:red;'>Announcement not found.</p>";
-    echo "<a href='admin_announcement.php'>Back to Announcements</a>";
+    $_SESSION['error'] = "Announcement not found.";
+    header("Location: admin_announcement.php");
     exit;
 }
 
@@ -51,8 +51,8 @@ if(isset($_SESSION['full_name'])) {
                 <nav class="menu">
                 <a href="admin_dashboard.php" class="menu-item">Dashboard</a>
                 <a href="admin_announcement.php" class="menu-item is-active">Announcements</a>
-                <a href="assign_lecturer.php" class="menu-item">Manage Students</a>
-                <a href="manage_lecturers.php" class="menu-item">Manage Lecturers</a>
+                <a href="manage_lecturers.php" class="menu-item">Visiting Lecturer Management</a>
+                <a href="../dashboards/student_management.php" class="menu-item">Student Management</a>
                 <a href="#" class="menu-item">Results</a>
                 <a href="#" class="menu-item">Get Help</a>
                 <a href="logout.php" class="menu-item">Logout</a>

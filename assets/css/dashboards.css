@@ -17,7 +17,7 @@ body {
 .sidebar {
     width: 250px;
     padding: 2rem 1rem;
-    background-color: darkslategray;
+    background-color: rgb(8, 18, 160);
 }
 
 .sidebar h3 {
@@ -41,7 +41,7 @@ body {
 
 .sidebar .menu .menu-item:hover,
 .sidebar .menu .menu-item.is-active {
-    color: #3bba9c;
+    color: #1e2be6;
     border-right: 5px solid #3bba9c;
 }
 
@@ -91,3 +91,81 @@ body {
     background-color: #dc3535;
 }
 
+.alert {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.alert.error {
+    color: #eb1139;
+}
+
+.alert.success {
+    color: #08bd56;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: #6c757d;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.btn-deactivate {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.btn-deactivate:hover {
+    background-color: #cc0000;
+}
+
+.btn-activate {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-activate:hover {
+    background-color: #1e7e34;
+}
+
+.btn-main {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-main:hover {
+    background-color: #0056b3;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+td, th {
+    text-align: left;
+}

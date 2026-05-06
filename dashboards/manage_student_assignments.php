@@ -43,8 +43,8 @@ $result = mysqli_query($conn, $sql);
             <nav class="menu">
                 <a href="admin_dashboard.php" class="menu-item">Dashboard</a>
                 <a href="admin_announcement.php" class="menu-item">Announcements</a>
-                <a href="manage_student_assignments.php" class="menu-item is-active">Student Assignments</a>
-                <a href="manage_lecturers.php" class="menu-item">Manage Lecturers</a>
+                <a href="manage_lecturers.php" class="menu-item is-active">Visiting Lecturer Management</a>
+                <a href="../dashboards/student_management.php" class="menu-item">Student Management</a>
                 <a href="#" class="menu-item">Results</a>
                 <a href="#" class="menu-item">Get Help</a>
                 <a href="../verify/logout.php" class="menu-item">Logout</a>
@@ -56,7 +56,23 @@ $result = mysqli_query($conn, $sql);
             <p>Welcome, <b><?php echo $full_name; ?></b></p>
             <p>Assign students to visiting lecturers here.</p>
 
-            <br>
+            <?php if(isset($_SESSION['error'])) { ?>
+                <div class="alert error">
+                    <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                </div>
+            <?php } ?>
+
+            <?php if(isset($_SESSION['success'])) { ?>
+                <div class="alert success">
+                    <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                </div>
+            <?php } ?>
+
+            <a href="manage_lecturers.php" class="btn-secondary">
+                ← Back to Visiting Lecturer Management
+            </a>
+
+            <br><br>
 
             <h2>Student List</h2>
 

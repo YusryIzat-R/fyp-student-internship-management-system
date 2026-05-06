@@ -9,8 +9,8 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != "admin") {
 }
 
 if(!isset($_GET['id'])) {
-    echo "<p style='color:red;'>Lecturer ID not found or missing.</p>";
-    echo "<a href='manage_lecturers.php'>Back to Manage Lecturers Page</a>";
+    $_SESSION['error'] = "Lecturer ID not found or missing.";
+    header("Location: manage_lecturers.php");
     exit;
 }
 
@@ -20,8 +20,8 @@ $sql = "SELECT * FROM lecturers WHERE id = '$lecturer_id'";
 $result = mysqli_query($conn, $sql);
 
 if(!$result || mysqli_num_rows($result) == 0) {
-    echo "<p style='color:red;'>Lecturer not found.</p>";
-    echo "<a href='manage_lecturers.php'>Back to Manage Lecturers Page</a>";
+    $_SESSION['error'] = "Lecturer not found.";
+    header("Location: manage_lecturers.php");
     exit;
 }
 
@@ -51,20 +51,24 @@ if(isset($_SESSION['full_name'])) {
             <nav class="menu">
                 <a href="admin_dashboard.php" class="menu-item">Dashboard</a>
                 <a href="admin_announcement.php" class="menu-item">Announcements</a>
-                <a href="manage_student_assignments.php" class="menu-item">Student Assignments</a>
-                <a href="manage_lecturers.php" class="menu-item is-active">Manage Lecturers</a>
+                <a href="manage_lecturers.php" class="menu-item is-active">Visiting Lecturer Management</a>
+                <a href="../dashboards/student_management.php" class="menu-item">Student Management</a>
                 <a href="#" class="menu-item">Results</a>
                 <a href="#" class="menu-item">Get Help</a>
                 <a href="../verify/logout.php" class="menu-item">Logout</a>
             </nav>
-
-            
         </aside>
 
         <main class="content">
             <h1>Edit Lecturer</h1>
             <p>Welcome, <b><?php echo $full_name; ?></b></p>
             <p>Update visiting lecturer details here.</p>
+
+            <?php if(isset($_SESSION['error'])) { ?>
+                <div class="alert error">
+                    <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                </div>
+            <?php } ?>
 
             <br>
 

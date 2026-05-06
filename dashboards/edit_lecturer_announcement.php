@@ -9,8 +9,8 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != "lecturer") {
 }
 
 if(!isset($_GET['id'])) {
-    echo "<p style='color: red;'>Announcement ID not found.</p>";
-    echo "<a href= 'lecturer_announcement.php'>Back to Announcements</a>";
+    $_SESSION['error'] = "Announcement ID not found.";
+    header("Location: lecturer_announcement.php");
     exit;
 }
 
@@ -23,8 +23,8 @@ $sql = "SELECT * FROM announcements WHERE announcement_id = '$id' AND posted_by 
 $result = mysqli_query($conn, $sql);
 
 if(!$result || mysqli_num_rows($result) == 0) {
-    echo "<p style='color: red;'>Announcement not found / you are not allowed to edit this announcement.</p>";
-    echo "<a href= 'lecturer_announcement.php'>Back to Announcements</a>";
+    $_SESSION['error'] = "Announcement not found or you are not allowed to edit this announcement.";
+    header("Location: lecturer_announcement.php");
     exit;
 }
 

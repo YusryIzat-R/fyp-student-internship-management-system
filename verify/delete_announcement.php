@@ -14,8 +14,8 @@ if($_SESSION['role'] == "admin") {
 }
 
 if(!isset($_GET['id'])) {
-    echo "<p style='color:red;'>Announcement ID not found.</p>";
-    echo "<a href='$back_page'>Back to Announcements</a>";
+    $_SESSION['error'] = "Announcement ID not found.";
+    header("Location: $back_page");
     exit;
 }
 
@@ -23,21 +23,21 @@ $id = $_GET['id'];
 $login_id = $_SESSION["login_id"];
 $role = $_SESSION["role"];
 
-/* Admin can delete any announcement, lecturer can only delete their own announcement */
 if($role == "admin") {
     $sql = "DELETE FROM announcements WHERE announcement_id='$id'";
 } else {
-    $sql = "DELETE FROM announcements WHERE announcement_id='$id' AND posted_by='$login_id'";
+    $sql = "DELETE FROM announcements WHERE announcement_id='$id' AND posted_by='$login_id' AND role='lecturer'";
 }
 
 $result = mysqli_query($conn, $sql);
 
 if($result && mysqli_affected_rows($conn) > 0) {
+    $_SESSION['success'] = "Announcement deleted successfully.";
     header("Location: $back_page");
     exit;
 } else {
-    echo "<p style='color:red;'>Failed to delete announcement. Please try again.</p>";
-    echo "<a href='$back_page'>Back to Announcements</a>";
+    $_SESSION['error'] = "Failed to delete announcement.";
+    header("Location: $back_page");
     exit;
 }
 ?>

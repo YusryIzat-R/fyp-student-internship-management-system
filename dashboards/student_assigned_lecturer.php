@@ -60,11 +60,11 @@ if($student["assigned_lecturer_id"] == NULL) {
                 <h3>Student Menu</h3>
 
                 <nav class="menu">
-                    <a href="../dashboards/student_dashboard.php" class="menu-item">Dashboards</a>
+                    <a href="../dashboards/student_dashboard.php" class="menu-item">Dashboard</a>
                     <a href="../dashboards/student_announcement.php" class="menu-item">Announcements</a>
                     <a href="#" class="menu-item">Resources</a>
                     <a href="../dashboards/student_assigned_lecturer.php" class="menu-item is-active">My Lecturer</a>
-                    <a href="#" class="menu-item">Presentation Booking</a>
+                    <a href="../dashboards/student_presentation_booking.php" class="menu-item">Presentation Booking</a>
                     <a href="#" class="menu-item">My Result</a>
                     <a href="#" class="menu-item">Get Help</a>
                     <a href="../verify/logout.php" class="menu-item">Logout</a>

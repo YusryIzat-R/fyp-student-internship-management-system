@@ -33,10 +33,10 @@ if(isset($_SESSION['full_name'])) {
                     <a href="../dashboards/student_announcement.php" class="menu-item">Announcements</a>
                     <a href="#" class="menu-item">Resources</a>
                     <a href="../dashboards/student_assigned_lecturer.php" class="menu-item">My Lecturer</a>
-                    <a href="#" class="menu-item">Presentation</a>
+                    <a href="../dashboards/student_presentation_booking.php" class="menu-item">Presentation Booking</a>
                     <a href="#" class="menu-item">My Result</a>
                     <a href="#" class="menu-item">Get Help</a>
-                    <a href="../public/logout.php" class="menu-item">Logout</a>
+                    <a href="../verify/logout.php" class="menu-item">Logout</a>
                 </nav>
             </aside>
 

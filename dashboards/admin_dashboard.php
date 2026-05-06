@@ -31,8 +31,8 @@ if(isset($_SESSION['full_name'])) {
                 <nav class="menu">
                     <a href="../dashboards/admin_dashboard.php" class="menu-item is-active">Dashboard</a>
                     <a href="../dashboards/admin_announcement.php" class="menu-item">Announcements</a>
-                    <a href="../dashboards/manage_student_assignments.php" class="menu-item">Lecturer Assignment</a>
-                    <a href="../dashboards/manage_lecturers.php" class="menu-item">Manage Lecturers</a>
+                    <a href="../dashboards/manage_lecturers.php" class="menu-item">Visitng Lecturer Management</a>
+                    <a href="../dashboards/student_management.php" class="menu-item">Student Management</a>
                     <a href="#" class="menu-item">Results</a>
                     <a href="#" class="menu-item">Get Help</a>
                     <a href="../public/logout.php" class="menu-item">Logout</a>
