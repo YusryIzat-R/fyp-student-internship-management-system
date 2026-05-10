@@ -18,6 +18,23 @@ $student = mysqli_fetch_assoc($student_result);
 $student_id = $student['id'];
 $lecturer_id = $student['assigned_lecturer_id'];
 
+$booked_slots = [];
+
+if($lecturer_id != NULL) {
+    $slot_sql = "SELECT date, time_slot
+                 FROM presentation_booking
+                 WHERE lecturer_id = '$lecturer_id'
+                 AND status IN ('pending', 'accepted')";
+
+$slot_result = mysqli_query($conn, $slot_sql);
+
+if($slot_result && mysqli_num_rows($slot_result) > 0) {
+    while($slot = mysqli_fetch_assoc($slot_result)) {
+        $booked_slots[$slot['date']][] = $slot['time_slot'];
+        }
+    }
+}
+
 $booking_sql = "SELECT * FROM presentation_booking
                 WHERE student_id = '$student_id'
                 ORDER BY created_at DESC
@@ -82,17 +99,17 @@ if($booking_result && mysqli_num_rows($booking_result) > 0) {
 
                 <form action="../verify/add_presentation_booking.php" method="POST">
                     <label for="date">Presentation Date:</label><br>
-                    <input type="date" name="date" id="date" required>
+                    <input type="date" name="date" id="date" min="<?php echo date('Y-m-d'); ?>" required>
                     <br><br>
 
                     <label for="time_slot">Time Slot:</label><br>
                     <select name="time_slot" id="time_slot" required>
                         <option value="">-- Select Timeslot --</option>
-                        <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
-                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
-                        <option value="11:00 AM - 12:00 AM">11:00 AM - 12:00 AM</option>
-                        <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
-                        <option value="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM</option>
+                        <option value="09:00 AM - 10:00 AM" data-slot="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM" data-slot="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM" data-slot="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="02:00 PM - 03:00 PM" data-slot="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+                        <option value="03:00 PM - 04:00 PM" data-slot="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM</option>
                     </select>
                     <br><br>
 
@@ -108,7 +125,7 @@ if($booking_result && mysqli_num_rows($booking_result) > 0) {
                 <p><b>Date:</b><?php echo $booking['date']; ?></p>
                 <p><b>Time Slot:</b><?php echo $booking['time_slot']; ?></p>
                 <p><b>Venue:</b><?php echo $booking['venue']; ?></p>
-                <p><b>Status:</b><?php echo ucfirst($booking['date']); ?></p>
+                <p><b>Status:</b><?php echo ucfirst($booking['status']); ?></p>
 
                 <?php if($booking['lecturer_comment'] != "") { ?>
                     <p><b>Lecturer Comment:</b><?php echo $booking['lecturer_comment']; ?></p>
@@ -116,7 +133,20 @@ if($booking_result && mysqli_num_rows($booking_result) > 0) {
 
                 <?php if($booking['status'] == "pending" || $booking['status'] == "rejected") { ?>
                     <br>
-                    <a href="edit_presentation_booking.php?id=<?php echo $booking['booking_id']; ?>">Edit Booking</a>
+                    <div class="booking-actions">
+
+                        <a href="edit_presentation_booking.php?id=<?php echo $booking['booking_id']; ?>"
+                            class="booking-btn edit-btn">
+                            Edit Booking
+                        </a>
+
+                        <a href="../verify/delete_presentation.php?id=<?php echo $booking['booking_id']; ?>"
+                            class="booking-btn delete-btn"
+                            onclick="return confirm('Delete this booking?');">
+                            Delete Booking
+                        </a>
+
+                    </div>
                 <?php } else { ?>
                     <p style="color:green;">Your booking has been accepted and can no longer be edited.</p>
                 <?php } ?>
@@ -124,5 +154,36 @@ if($booking_result && mysqli_num_rows($booking_result) > 0) {
                 <?php } ?>
         </main>
     </div>
+
+    <script>
+        const bookedSlots = <?php echo json_encode($booked_slots); ?>;
+        console.log(bookedSlots);
+
+        const dateInput = document.getElementById("date");
+        const timeSlotSelect = document.getElementById("time_slot");
+
+        function updateAvailableSlots() {
+            const selectedDate = dateInput.value;
+            const bookedForDate = bookedSlots[selectedDate] || [];
+
+            for (let i = 0; i < timeSlotSelect.options.length; i++) {
+                const option = timeSlotSelect.options[i];
+                const slotValue = option.getAttribute("data-slot");
+
+                option.disabled = false;
+
+                if(slotValue && bookedForDate.includes(slotValue)) {
+                    option.disabled = true;
+                    option.textContent = slotValue + " (Booked)";
+                } else if (slotValue) {
+                    option.textContent = slotValue;
+                }
+            }
+
+            timeSlotSelect.value = "";
+        }
+
+        dateInput.addEventListener("change", updateAvailableSlots);
+    </script>
 </body>
 </html>
