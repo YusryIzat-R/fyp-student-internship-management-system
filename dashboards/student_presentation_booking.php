@@ -63,7 +63,7 @@ if($booking_result && mysqli_num_rows($booking_result) > 0) {
             <nav class="menu">
                 <a href="../dashboards/student_dashboard.php" class="menu-item">Dashboard</a>
                 <a href="../dashboards/student_announcement.php" class="menu-item">Announcements</a>
-                <a href="#" class="menu-item">Resources</a>
+                <a href="../dashboards/student_resource.php" class="menu-item">Resources</a>
                 <a href="../dashboards/student_assigned_lecturer.php" class="menu-item">My Lecturer</a>
                 <a href="../dashboards/student_presentation_booking.php" class="menu-item is-active">Presentation Booking</a>
                 <a href="#" class="menu-item">My Result</a>

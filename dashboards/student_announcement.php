@@ -35,7 +35,7 @@ $result = mysqli_query($conn, $sql);
                 <nav class="menu">
                     <a href="student_dashboard.php" class="menu-item">Dashboard</a>
                     <a href="student_announcement.php" class="menu-item is-active">Announcements</a>
-                    <a href="#" class="menu-item">Resources</a>
+                    <a href="student_resource.php" class="menu-item">Resources</a>
                     <a href="student_assigned_lecturer.php" class="menu-item">My Lecturer</a>
                     <a href="student_presentation_booking.php" class="menu-item">Presentation Booking</a>
                     <a href="#" class="menu-item">My Result</a>

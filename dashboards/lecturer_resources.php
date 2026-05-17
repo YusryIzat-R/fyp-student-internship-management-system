@@ -40,7 +40,7 @@ if(!$result) {
                 <a href="lecturer_resources.php" class="menu-item is-active">Internship Resources Management</a>
                 <a href="lecturer_assigned_students.php" class="menu-item">My Students</a>
                 <a href="lecturer_presentation_booking.php" class="menu-item">Presentation Timeslot Management</a>
-                <a href="#" class="menu-item">Grading</a>
+                <a href="lecturer_grading.php" class="menu-item">Grading</a>
                 <a href="../verify/logout.php" class="menu-item">Logout</a>
         </nav>
     </aside>
@@ -113,6 +113,11 @@ if(!$result) {
                         <a href="edit_resource.php?id=<?php echo $row['resource_id'];?>" 
                         class="resource-btn edit-btn">
                             Edit
+                        </a>
+
+                        <a href="lecturer_submissions.php?resource_id=<?php echo $row['resource_id']; ?>"
+                        class="resource-btn submission-btn">
+                            View Submissions
                         </a>
 
                         <a href="../verify/delete_resource.php?id=<?php echo $row['resource_id']; ?>"

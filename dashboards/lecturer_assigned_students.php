@@ -68,21 +68,80 @@ $student_result = mysqli_query($conn, $student_sql);
 
                 <?php
                 if($student_result && mysqli_num_rows($student_result) > 0) {
-                    echo "<table border='1' cellpadding='10' cellspacing='0' style'background: white; border-collapse: collapse; width: 100%;'>";
+                    echo "<table border='1' cellpadding='10' cellspacing='1' style='background: white; border-collapse: collapse; width: 100%;'>";
                     echo "<tr>";
                     echo "<th>Student No</th>";
                     echo "<th>Full Name</th>";
                     echo "<th>Email</th>";
                     echo "<th>Program</th>";
+                    echo "<th>Submission Progress</th>";
+                    echo "<th>Presentation Status</th>";
+                    echo "<th>Action</th>";
                     echo "</tr>";
 
                     while($student = mysqli_fetch_assoc($student_result)) {
+
+                    $student_no = $student['student_no'];
+                    $student_id = $student['id'];
+
+                    /** Count total resources uploaded by the students */
+                    $total_resource_sql = "SELECT COUNT(*) AS total_resources
+                                           FROM resources
+                                           WHERE lecturer_id = '$login_id'";
+
+                    $total_resource_result = mysqli_query($conn, $total_resource_sql);
+                    $total_resource_row = mysqli_fetch_assoc($total_resource_result);
+                    $total_resources = $total_resource_row['total_resources'];
+
+                    /** Count approved submissions by students */
+                    $approved_sql = "SELECT COUNT(*) AS approved_submissions
+                                     FROM submissions
+                                     INNER JOIN resources ON submissions.resource_id = resources.resource_id
+                                     WHERE submissions.student_id = '$student_no'
+                                     AND resources.lecturer_id = '$login_id'
+                                     AND submissions.status = 'approved'";
+
+                    $approved_result = mysqli_query($conn, $approved_sql);
+                    $approved_row = mysqli_fetch_assoc($approved_result);
+                    $approved_submissions = $approved_row['approved_submissions'];
+
+                    $submission_progress = $approved_submissions . " / " . $total_resources . " Approved";
+
+                    /** Get latest presentation booking status */
+                    $booking_sql = "SELECT * FROM presentation_booking
+                                    WHERE student_id = '$student_id'
+                                    ORDER BY created_at DESC
+                                    LIMIT 1";
+
+                    $booking_result = mysqli_query($conn, $booking_sql);
+
+                    if($booking_result && mysqli_num_rows($booking_result) > 0) {
+                        $booking = mysqli_fetch_assoc($booking_result);
+                        $presentation_status = ucfirst($booking['status']);
+                    } else {
+                        $presentation_status = "No Bookings";
+                    }
+
                         echo "<tr>";
                         echo "<td>" . $student['student_no'] . "</td>";
                         echo "<td>" . $student['full_name'] . "</td>";
                         echo "<td>" . $student['email'] . "</td>";
                         echo "<td>" . $student['program'] . "</td>";
-                        echo "</tr>";
+                        echo "<td>" . $submission_progress . "</td>";
+                        echo "<td>" . $presentation_status . "</td>";
+                        
+                        echo "<td>
+                                <a href='lecturer_submissions.php?student_no=" . $student_no . "'>
+                                    View Submissions
+                                </a>
+                                <br><br>
+                                <a href='lecturer_presentation_booking.php?student_no=" . $student_no . "'>
+                                    View Booking
+                                </a>
+                            </td>";
+
+                    echo "</tr>";
+                        
                     }
                     echo "</table>";
                 } else {

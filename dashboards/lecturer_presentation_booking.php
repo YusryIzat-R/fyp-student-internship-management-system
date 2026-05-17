@@ -21,6 +21,13 @@ if(!$lecturer_result || mysqli_num_rows($lecturer_result) == 0) {
 $lecturer = mysqli_fetch_assoc($lecturer_result);
 $lecturer_id = $lecturer['id'];
 
+$student_filter = "";
+
+if(isset($_GET['student_no'])) {
+    $student_no = $_GET['student_no'];
+    $student_filter = "AND students.student_no = '$student_no'";
+}
+
 $sql = "SELECT presentation_booking.*, 
                students.student_no, 
                students.full_name AS student_name,
@@ -29,6 +36,7 @@ $sql = "SELECT presentation_booking.*,
         FROM presentation_booking
         INNER JOIN students ON presentation_booking.student_id = students.id
         WHERE presentation_booking.lecturer_id = '$lecturer_id'
+        $student_filter
         ORDER BY presentation_booking.date ASC, presentation_booking.time_slot ASC";
 
 $result = mysqli_query($conn, $sql);
@@ -56,7 +64,7 @@ if(!$result) {
             <a href="lecturer_resources.php" class="menu-item">Internship Resources Management</a>
             <a href="lecturer_assigned_students.php" class="menu-item">My Students</a>
             <a href="lecturer_presentation_booking.php" class="menu-item is-active">Presentation Timeslot Management</a>
-            <a href="#" class="menu-item">Grading</a>
+            <a href="lecturer_grading.php" class="menu-item">Grading</a>
             <a href="../verify/logout.php" class="menu-item">Logout</a>
         </nav>
     </aside>

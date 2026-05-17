@@ -40,7 +40,7 @@ $result = mysqli_query($conn, $sql);
                     <a href="../dashboards/lecturer_resources.php" class="menu-item">Internship Resources Management</a>
                     <a href="../dashboards/lecturer_assigned_students.php" class="menu-item">My Students</a>
                     <a href="../dashboards/lecturer_presentation_booking.php" class="menu-item">Presentation Timeslot Management</a>
-                    <a href="#" class="menu-item">Grading</a>
+                    <a href="../dashboards/lecturer_grading.php" class="menu-item">Grading</a>
                     <a href="../verify/logout.php" class="menu-item">Logout</a>
                 </nav>
             </aside>
