@@ -92,8 +92,8 @@ if($submission_result && mysqli_num_rows($submission_result) > 0) {
                 <a href="../dashboards/student_resource.php" class="menu-item is-active">Resources</a>
                 <a href="../dashboards/student_assigned_lecturer.php" class="menu-item">My Lecturer</a>
                 <a href="../dashboards/student_presentation_booking.php" class="menu-item">Presentation Booking</a>
-                <a href="#" class="menu-item">My Result</a>
-                <a href="#" class="menu-item">Get Help</a>
+                <a href="../dashboards/student_result.php" class="menu-item">My Result</a>
+                <a href="../dashboards/student_get_help.php" class="menu-item">Get Help</a>
                 <a href="../verify/logout.php" class="menu-item">Logout</a>
             </nav>
         </aside>
@@ -122,6 +122,14 @@ if($submission_result && mysqli_num_rows($submission_result) > 0) {
                 <b>Resource File:</b>
                 <a href="../<?php echo $resource['file_path']; ?>" target="_blank">Download / View</a>
             </p>
+
+            <br>
+
+            <a href="student_resource.php" class="resource-btn-two">
+                ← Back to Resources
+            </a>
+
+            <br>
 
             <br><hr><br>
 

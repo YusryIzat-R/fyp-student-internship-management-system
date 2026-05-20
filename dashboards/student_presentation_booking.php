@@ -66,8 +66,8 @@ if($booking_result && mysqli_num_rows($booking_result) > 0) {
                 <a href="../dashboards/student_resource.php" class="menu-item">Resources</a>
                 <a href="../dashboards/student_assigned_lecturer.php" class="menu-item">My Lecturer</a>
                 <a href="../dashboards/student_presentation_booking.php" class="menu-item is-active">Presentation Booking</a>
-                <a href="#" class="menu-item">My Result</a>
-                <a href="#" class="menu-item">Get Help</a>
+                <a href="../dashboards/student_result.php" class="menu-item">My Result</a>
+                <a href="../dashboards/student_get_help.php" class="menu-item">Get Help</a>
                 <a href="../verify/logout.php" class="menu-item">Logout</a>
             </nav>
         </aside>

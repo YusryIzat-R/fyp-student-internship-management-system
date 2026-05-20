@@ -49,6 +49,21 @@ if(!$lecturer_check_result || mysqli_num_rows($lecturer_check_result) == 0) {
     exit;
 }
 
+/** Check if lecturer has already 5 assigned students */
+$count_sql = "SELECT COUNT(*) AS total_assigned
+              FROM students
+              WHERE assigned_lectuer_id = '$lecturer_id'
+              AND id != '$student_id'";
+
+$count_result = mysqli_query($conn, $count_sql);
+$count_row = mysqli_fetch_assoc($count_result);
+
+if($count_row['total_assigned'] >= 5){
+    $_SESSION['error'] = "This lecturer already has 5 assigned students. Please choose another lecturer.";
+    header("Location: $back_page");
+    exit;
+}
+
 $sql = "UPDATE students 
         SET assigned_lecturer_id = '$lecturer_id' 
         WHERE id = '$student_id'";

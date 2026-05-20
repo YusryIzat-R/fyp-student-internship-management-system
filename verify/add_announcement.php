@@ -25,8 +25,8 @@ if(!isset($_POST["add_announcement"])) {
     exit;
 }
 
-$title = trim($_POST["title"]);
-$content = trim($_POST["content"]);
+$title = mysqli_real_escape_string($conn, trim($_POST['title']));
+$content = mysqli_real_escape_string($conn, trim($_POST['content']));
 $posted_by = $_SESSION["login_id"];
 $role = $_SESSION["role"];
 

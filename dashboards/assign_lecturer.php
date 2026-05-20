@@ -57,8 +57,9 @@ if(isset($_SESSION['full_name'])) {
                     <a href="admin_dashboard.php" class="menu-item">Dashboard</a>
                     <a href="admin_announcement.php" class="menu-item">Announcements</a>
                     <a href="manage_lecturers.php" class="menu-item">Visiting Lecturer Management</a>
-                    <a href="../dashboards/student_management.php" class="menu-item">Student Management</a>
-                    <a href="#" class="menu-item">Results</a>
+                    <a href="student_management.php" class="menu-item">Student Management</a>
+                    <a href="admin_required_submissions.php" class="menu-item">Required Submissions</a>
+                    <a href="admin_results.php" class="menu-item">Results</a>
                     <a href="#" class="menu-item">Get help</a>
                     <a href="../verify/logout.php" class="menu-item">Logout</a>
                 </nav>
@@ -88,15 +89,37 @@ if(isset($_SESSION['full_name'])) {
                         <?php
                         if($lecturer_result && mysqli_num_rows($lecturer_result) > 0) {
                             while($lecturer = mysqli_fetch_assoc($lecturer_result)) {
-                                echo "<option value='" . $lecturer['id'] . "'";
 
-                                if($student['assigned_lecturer_id'] == $lecturer['id']) {
-                                    echo " selected";
-                                }
+                            $count_sql = "SELECT COUNT(*) AS total_assigned
+                                          FROM students
+                                          WHERE assigned_lecturer_id = '" . $lecturer['id'] . "'";
 
-                                echo ">";
-                                echo $lecturer['lecturer_no'] . " - " . $lecturer['full_name'];
-                                echo "</option>";
+                            $count_result = mysqli_query($conn, $count_sql);
+                            $count_row = mysqli_fetch_assoc($count_result);
+
+                            $total_assigned = $count_row['total_assigned'];
+                            $is_full = $total_assigned >= 5;
+
+                            echo "<option value='" . $lecturer['id'] . "'";
+
+                            if($student['assigned_lecturer_id'] == $lecturer['id']) {
+                                echo " selected";
+                            }
+
+                            if($is_full && $student['assigned_lecturer_id'] != $lecturer['id']) {
+                                echo " disabled";
+                            }
+
+                            echo ">";
+
+                            echo $lecturer['lecturer_no'] . " - " . $lecturer['full_name'];
+                            echo " (" . $total_assigned . "/5 Students)";
+
+                            if($is_full) {
+                                echo " - Full";
+                            }
+
+                            echo "</option>";
                             }
                         }
                         ?>

@@ -54,7 +54,7 @@ $student_result = mysqli_query($conn, $student_sql);
                     <a href="lecturer_resources.php" class="menu-item">Internship Resources Management</a>
                     <a href="lecturer_assigned_students.php" class="menu-item is-active">My Students</a>
                     <a href="lecturer_presentation_booking.php" class="menu-item">Presentation Timeslot Management</a>
-                    <a href="#" class="menu-item">Grading</a>
+                    <a href="lecturer_grading.php" class="menu-item">Grading</a>
                     <a href="../verify/logout.php" class="menu-item">Logout</a>
                 </nav>
             </aside>

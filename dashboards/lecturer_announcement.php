@@ -97,7 +97,7 @@ $result = mysqli_query($conn, $sql);
                         echo "<p><b>Role:</b> " . $row['role'] . "</p>";
                         echo "<p><b>Created At:</b> " . $row['created_at'] . "</p>";
 
-                        echo "<div style='margin-top: 15px;'>";
+                        echo "<br>";
                         echo "<a href='edit_lecturer_announcement.php?id=" . $row['announcement_id'] . "' style='margin-right: 10px;'>Edit</a>";
                         echo "<a href='../verify/delete_announcement.php?id=" . $row['announcement_id'] . "' style='color: red;' onclick='return confirm(\"Are you sure you want to delete this announcement?\");'>Delete</a>";
                         echo "</div>";

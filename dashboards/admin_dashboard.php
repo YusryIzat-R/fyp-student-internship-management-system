@@ -33,8 +33,9 @@ if(isset($_SESSION['full_name'])) {
                     <a href="../dashboards/admin_announcement.php" class="menu-item">Announcements</a>
                     <a href="../dashboards/manage_lecturers.php" class="menu-item">Visitng Lecturer Management</a>
                     <a href="../dashboards/student_management.php" class="menu-item">Student Management</a>
-                    <a href="#" class="menu-item">Results</a>
-                    <a href="#" class="menu-item">Get Help</a>
+                    <a href="../dashboards/admin_required_submissions.php" class="menu-item">Required Submissions</a>
+                    <a href="../dashboards/admin_results.php" class="menu-item">Results</a>
+                    <a href="../dashboards/admin_help_requests.php" class="menu-item">Get Help</a>
                     <a href="../public/logout.php" class="menu-item">Logout</a>
                 </nav>
             </aside>

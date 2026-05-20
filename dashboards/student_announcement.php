@@ -38,8 +38,8 @@ $result = mysqli_query($conn, $sql);
                     <a href="student_resource.php" class="menu-item">Resources</a>
                     <a href="student_assigned_lecturer.php" class="menu-item">My Lecturer</a>
                     <a href="student_presentation_booking.php" class="menu-item">Presentation Booking</a>
-                    <a href="#" class="menu-item">My Result</a>
-                    <a href="#" class="menu-item">Get Help</a>
+                    <a href="student_result.php" class="menu-item">My Result</a>
+                    <a href="student_get_help.php" class="menu-item">Get Help</a>
                     <a href="../verify/logout.php" class="menu-item">Logout</a>
                 </nav>
             </aside>

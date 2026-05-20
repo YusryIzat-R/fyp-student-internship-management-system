@@ -36,9 +36,10 @@ $result = mysqli_query($conn, $sql);
                     <a href="admin_dashboard.php" class="menu-item">Dashboard</a>
                     <a href="admin_announcement.php" class="menu-item is-active">Announcements</a>
                     <a href="manage_lecturers.php" class="menu-item">Visiting Lecturer Management</a>
-                    <a href="../dashboards/student_management.php" class="menu-item">Student Management</a>
-                    <a href="#" class="menu-item">Results</a>
-                    <a href="#" class="menu-item">Get Help</a>
+                    <a href="student_management.php" class="menu-item">Student Management</a>
+                    <a href="admin_required_submissions.php" class="menu-item">Required Submissions</a>
+                    <a href="admin_results.php" class="menu-item">Results</a>
+                    <a href="admin_help_requests.php" class="menu-item">Get Help</a>
                     <a href="../verify/logout.php" class="menu-item">Logout</a>
                 </nav>
             </aside>

@@ -39,8 +39,9 @@ if(!$result) {
             <a href="admin_announcement.php" class="menu-item">Announcements</a>
             <a href="manage_lecturers.php" class="menu-item">Visiting Lecturer Management</a>
             <a href="student_management.php" class="menu-item is-active">Student Management</a>
-            <a href="#" class="menu-item">Results</a>
-            <a href="#" class="menu-item">Get Help</a>
+            <a href="admin_required_submissions.php" class="menu-item">Required Submissions</a>
+            <a href="admin_results.php" class="menu-item">Results</a>
+            <a href="admin_help_requests.php" class="menu-item">Get Help</a>
             <a href="../verify/logout.php" class="menu-item">Logout</a>
         </nav>
     </aside>
@@ -123,6 +124,9 @@ if(!$result) {
                         echo "<td>-</td>";
 
                     }
+
+                    $no++;
+                    
                     echo "</tr>";
                 }
             } else {

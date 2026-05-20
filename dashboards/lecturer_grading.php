@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config/db,php';
+require_once '../config/db.php';
 /** @var mysqli $conn */
 
 if(!isset($_SESSION['role']) || $_SESSION['role'] != "lecturer") {
@@ -41,16 +41,16 @@ $student_result = mysqli_query($conn, $student_sql);
     </head>
     <body>
         <div class="wrapper">
-            <div class="sidebar">
+            <aside class="sidebar">
                 <h3>Lecturer Menu</h3>
 
                 <nav class="menu">
                     <a href="lecturer_dashboard.php" class="menu-item">Dashboard</a>
                     <a href="lecturer_announcement.php" class="menu-item">Announcements</a>
                     <a href="lecturer_resources.php" class="menu-item">Internship Resources Management</a>
-                    <a href="lecturer_assigned_students.php" class="menu-item is-active">My Students</a>
+                    <a href="lecturer_assigned_students.php" class="menu-item">My Students</a>
                     <a href="lecturer_presentation_booking.php" class="menu-item">Presentation Timeslot Management</a>
-                    <a href="lecturer_grading.php" class="menu-item">Grading</a>
+                    <a href="lecturer_grading.php" class="menu-item is-active">Grading</a>
                     <a href="../verify/logout.php" class="menu-item">Logout</a>
                 </nav>
             </aside>
@@ -91,47 +91,65 @@ $student_result = mysqli_query($conn, $student_sql);
                         $student_id = $student['id'];
 
                         /** Count total submissions uploaded by lecturers */
-                        $total_resource_sql = "SELECT COUNT(*) AS total_resources
-                                               FROM resources
-                                               WHERE lecturer_id = '$login_id'";
+                        $total_required_sql = "SELECT COUNT(*) AS total_required
+                                               FROM required_submissions
+                                               WHERE status = 'active'";
                         
-                        $total_resource_result = mysqli_query($conn, $total_resource_sql);
-                        $total_resource_row = mysqli_fetch_assoc($total_resource_result);
-                        $total_resources = $total_resource_row['total_resources'];
+                        $total_required_result = mysqli_query($conn, $total_required_sql);
+                        $total_required_row = mysqli_fetch_assoc($total_required_result);
+                        $total_required = $total_required_row['total_required'];
 
                         /** Count approved submissions */
                         $approved_sql = "SELECT COUNT(*) AS approved_submissions
                                          FROM submissions
-                                         INNER JOIN resources ON submissions.resource_id = resources.resource_id
+                                         INNER JOIN required_submissions
+                                         ON submissions.submission_type = required_submissions.submission_type
                                          WHERE submissions.student_id = '$student_no'
-                                         AND resources.lecturer_id = '$login_id'
-                                         AND submissions.status = 'approved'";
+                                         AND submissions.status = 'approved'
+                                         AND required_submissions.status = 'active'";
                         $approved_result = mysqli_query($conn, $approved_sql);
                         $approved_row = mysqli_fetch_assoc($approved_result);
                         $approved_submissions = $approved_row['approved_submissions'];
 
-                        $submission_progress = $approved_submissions . " / " . $total_resources . " Approved";
+                        /** Count submitted submissions */
+                        $submitted_sql = "SELECT COUNT(*) AS total_submitted
+                                          FROM submissions
+                                          INNER JOIN required_submissions
+                                          ON submissions.submission_type = required_submissions.submission_type
+                                          WHERE submissions.student_id = '$student_no'
+                                          AND required_submissions.status = 'active'";
+                        $submitted_result = mysqli_query($conn, $submitted_sql);
+                        $submitted_row = mysqli_fetch_assoc($submitted_result);
+                        $total_submitted = $submitted_row['total_submitted'];
+
+                        $submission_progress = $total_submitted . " / " . $total_required . " Submitted<br>" . $approved_submissions . " / " . $total_required . " Approved";
 
                         /* Get Presentation status */
                         $booking_sql = "SELECT * FROM presentation_booking
-                                        WHERE student_id = '$student_no'
+                                        WHERE student_id = '$student_id'
                                         AND lecturer_id = '$lecturer_id'
+                                        AND status = 'accepted'
                                         ORDER BY created_at DESC
                                         LIMIT 1";
 
                         $booking_result = mysqli_query($conn, $booking_sql);
 
                         $presentation_status = "No Bookings";
+                        $presentation_accepted = false;
 
                         if($booking_result && mysqli_num_rows($booking_result) > 0) {
                             $booking = mysqli_fetch_assoc($booking_result);
                             $presentation_status = ucfirst($booking['status']);
+
+                            if($booking['status'] == "accepted"){
+                                $presentation_accepted = true;
+                            }
                         }
 
                         /** Check if student has been graded and have result */
                         $result_sql = "SELECT * FROM results
                                        WHERE student_id = '$student_no'
-                                       AND lecturer_id = '$lecturer_id'
+                                       AND lecturer_id = '$login_id'
                                        LIMIT 1";
                         $result_check = mysqli_query($conn, $result_sql);
 
@@ -152,9 +170,9 @@ $student_result = mysqli_query($conn, $student_sql);
                         echo "<td>";
 
                         if($result_check && mysqli_num_rows($result_check) > 0) {
-                            echo "<a href='grade_student.php?student_no=" . $student_no . "'>View / Edit Grade</a>";
+                            echo "<span style='color: green'; font-weight: bold;'>Graded</span>";
                         } else {
-                            if($total_resources > 0 && $approved_submissions == $total_resources && $presentation_status == "Accepted") {
+                            if($total_required > 0 && $approved_submissions == $total_required && $presentation_accepted == true) {
                                 echo "<a href='grade_student.php?student_no=" . $student_no . "'>Grade Student</a>";
                             } else {
                                 echo "<span style='color:red;'>Not eligible yet</span>";
@@ -174,5 +192,3 @@ $student_result = mysqli_query($conn, $student_sql);
         </div>
     </body>
 </html>
-
-            
