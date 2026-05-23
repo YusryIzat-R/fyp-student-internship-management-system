@@ -17,7 +17,7 @@ if(isset($_SESSION['full_name'])) {
 
 $login_id = $_SESSION["login_id"];
 
-$sql = "SELECT * FROM announcements WHERE posted_by = '$login_id' AND role = 'lecturer' ORDER BY created_at DESC";
+$sql = "SELECT * FROM announcements WHERE posted_by = '$login_id' AND role = 'lecturer' ORDER BY created_at ASC";
 $result = mysqli_query($conn, $sql);
 ?>
 

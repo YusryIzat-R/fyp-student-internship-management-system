@@ -15,7 +15,7 @@ if(isset($_SESSION['full_name'])) {
     $full_name = $_SESSION["login_id"];
 }
 
-$sql = "SELECT * FROM announcements ORDER BY created_at DESC";
+$sql = "SELECT * FROM announcements ORDER BY created_at ASC";
 $result = mysqli_query($conn, $sql);
 ?>
 

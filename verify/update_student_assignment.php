@@ -52,7 +52,7 @@ if(!$lecturer_check_result || mysqli_num_rows($lecturer_check_result) == 0) {
 /** Check if lecturer has already 5 assigned students */
 $count_sql = "SELECT COUNT(*) AS total_assigned
               FROM students
-              WHERE assigned_lectuer_id = '$lecturer_id'
+              WHERE assigned_lecturer_id = '$lecturer_id'
               AND id != '$student_id'";
 
 $count_result = mysqli_query($conn, $count_sql);

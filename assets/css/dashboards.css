@@ -17,7 +17,7 @@ body {
 .sidebar {
     width: 250px;
     padding: 2rem 1rem;
-    background-color: rgb(8, 18, 160);
+    background-color: rgb(0, 0, 0);
 }
 
 .sidebar h3 {
@@ -41,7 +41,7 @@ body {
 
 .sidebar .menu .menu-item:hover,
 .sidebar .menu .menu-item.is-active {
-    color: #1e2be6;
+    color: #ffffff;
     border-right: 5px solid #3bba9c;
 }
 
